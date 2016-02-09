@@ -117,7 +117,7 @@ func TestGuestsDistanceCalculations(t *testing.T) {
 		1000.0)
 
 	if len(guestsNearBy) != 0 {
-		fmt.Println("None of the cities is withing distance %f km from Warsaw, yet found some:", distance)
+		fmt.Printf("None of the cities is withing distance %f km from Warsaw, yet found some:", distance)
 		for _, g := range guestsNearBy {
 			fmt.Println(g)
 		}

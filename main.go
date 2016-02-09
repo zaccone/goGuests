@@ -13,6 +13,9 @@ const defaultDistance = 100.0 // in km
 var fileName string
 var distance float64
 
+// parse parses available options and guards invalid options.
+// As this is usually beginning of whole application, all failures will
+// result in error message being displayed and exiting program.
 func parse() error {
 
 	flag.StringVar(&fileName, "f", "", "Path of a file with list of guests")
