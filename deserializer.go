@@ -17,7 +17,6 @@ func unMarshallGuest(data []byte) (*Guest, error) {
 	} else {
 		return &guest, nil
 	}
-
 }
 
 func ReadGuestsList(input string) (Guests, error) {
@@ -37,7 +36,5 @@ func ReadGuestsList(input string) (Guests, error) {
 			}
 		}
 	}
-
 	return guests, nil
-
 }

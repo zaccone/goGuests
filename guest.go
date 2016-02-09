@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"math"
@@ -20,15 +21,26 @@ func (g *Guest) String() string {
 
 func (g *Guest) isWithinDistance(longRad, latRad, distance float64) (bool, error) {
 
-	guestLat, guestLong := ConvertDegToRad(g.Latitude, g.Longitude)
+	if distance < 0.0 {
+		return false, errors.New("Distance cannot be negative")
+	}
 
-	longDelta := math.Abs(guestLong - longRad)
+	guestLat, guestLong, err := ConvertDegToRad(g.Latitude, g.Longitude)
 
-	delta := math.Acos(math.Sin(latRad)*math.Sin(guestLat) +
-		math.Cos(latRad)*math.Cos(guestLat)*math.Cos(longDelta))
+	if err != nil {
+		msg := fmt.Sprintf("Guest %d, error while converting Deg To Rad: %s\n",
+			g.Id, err)
+		return false, errors.New(msg)
 
-	return delta*EarthRadius < distance, nil
+	} else {
 
+		longDelta := math.Abs(guestLong - longRad)
+
+		angle := math.Acos(math.Sin(latRad)*math.Sin(guestLat) +
+			math.Cos(latRad)*math.Cos(guestLat)*math.Cos(longDelta))
+
+		return angle*EarthRadius <= distance, nil
+	}
 }
 
 type Guests []*Guest
@@ -58,9 +70,9 @@ func (guests Guests) FindGuestsWithinRange(longitude, latitude, distance float64
 			longitude,
 			latitude,
 			distance)
+
 		if err != nil {
-			log.Printf("Error while calculating distance\n guest: %s, error:%s\n",
-				guest, err)
+			log.Println(err)
 		} else if ok {
 			guestsNearBy = append(guestsNearBy, guest)
 		}
