@@ -28,7 +28,7 @@ func unMarshallGuest(data []byte) (*Guest, error) {
 // Effectively a Guests object is created and filled with *Guest objects and
 // eventually returned.
 // If the line cannot be properly decoded a log entry will be printed out
-// and the line will be ommited.
+// and the line will be omitted.
 func ReadGuestsList(input string) (Guests, error) {
 
 	guests := make(Guests, 0, 0)

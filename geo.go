@@ -15,9 +15,9 @@ const (
 	EarthRadius        = 6371.0 // in km
 )
 
-// ConverDefToRad converts degrees to radians and returns latitude and
+// ConverDegToRad converts degrees to radians and returns latitude and
 // longitude in radians. If arguments are not withing correct ranges
-// (for longitudes and latitudes in degress) an error will be returned
+// (for longitudes and latitudes in degrees) an error will be returned
 func ConvertDegToRad(lat, long float64) (float64, float64, error) {
 
 	if lat < -90 || lat > 90 {

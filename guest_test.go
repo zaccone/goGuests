@@ -238,7 +238,7 @@ func TestGuestsLess(t *testing.T) {
 	}
 
 	if guests.Less(1, 0) == true {
-		t.Error("Expected asserted elementes NOT to be less")
+		t.Error("Expected asserted elements NOT to be less")
 	}
 }
 

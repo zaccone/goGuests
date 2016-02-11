@@ -15,7 +15,7 @@ type Guest struct {
 	Name      string  `json:"name"`
 }
 
-// Guest.String() returns formatted string for pretty Guest visualisation
+// Guest.String returns formatted string for pretty Guest formatting
 func (g *Guest) String() string {
 	return fmt.Sprintf("Guest id: %d, name: %s, lat: %f, long: %f",
 		g.Id, g.Name, g.Latitude, g.Longitude)
@@ -52,25 +52,25 @@ func (g *Guest) isWithinDistance(longRad, latRad, distance float64) (bool, error
 // Guests abstracts an iterable collection of *Guest objects
 type Guests []*Guest
 
-// Guests.Len() returns length of Guests objects
+// Guests.Len returns length of Guests objects
 func (guests Guests) Len() int {
 	return len(guests)
 }
 
-// Guests.Less() returns true if i'th element is smaller than j'th element of
-// Guests's collection
+// Guests.Less returns true if i'th element is smaller than j'th element of
+// Guests' collection
 func (guests Guests) Less(i, j int) bool {
 	return guests[i].Id < guests[j].Id
 }
 
-// Guests.Swap() swaps i'th and j'th element in Guests collection
+// Guests.Swap swaps i'th and j'th element in Guests collection
 func (guests Guests) Swap(i, j int) {
 	guest := guests[i]
 	guests[i] = guests[j]
 	guests[j] = guest
 }
 
-// Guests.FindGuestsWithinRange reurns a Guests collecion with all the Guest
+// Guests.FindGuestsWithinRange returns a Guests collection with all the Guest
 // objects who are located within a given distance from the point depicted by
 // longitude and latitude (both given in radians)
 func (guests Guests) FindGuestsWithinRange(longitude, latitude, distance float64) Guests {
